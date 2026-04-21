@@ -1,0 +1,12 @@
+langgraph
+langchain
+langchain-google-genai>=2.0.0
+google-genai
+python-dotenv
+pydantic>=2.0.0
+chromadb
+requests
+beautifulsoup4
+crawl4ai
+langchain-community
+redis
