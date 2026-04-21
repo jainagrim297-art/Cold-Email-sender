@@ -1,0 +1,15 @@
+.env
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+*.log
+custom-b2b-model/
+my-b2b-adapter/
+dataset.jsonl
+.DS_Store
