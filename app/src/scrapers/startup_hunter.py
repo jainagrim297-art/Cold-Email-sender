@@ -7,8 +7,11 @@ import csv
 import time
 
 # Get current script path for robust file handling
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA_DIR = os.path.join(BASE_DIR, "data")
+# __file__ is app/src/scrapers/startup_hunter.py
+SCRAPERS_DIR = os.path.dirname(os.path.abspath(__file__))
+SRC_DIR = os.path.dirname(SCRAPERS_DIR)
+APP_DIR = os.path.dirname(SRC_DIR)
+DATA_DIR = os.path.join(APP_DIR, "data")
 
 def run_discovery():
     print("🔍 Initializing Discovery Agent...")

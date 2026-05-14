@@ -22,33 +22,38 @@ from processor.sent_db import init_db, already_contacted, already_contacted_doma
 load_dotenv()
 
 # --- Configuration ---
+MY_EMAIL = os.getenv("GMAIL_ADDRESS")
+
 # TEST_MODE = True: Always sends the pitch to YOUR email (GMAIL_ADDRESS).
 # TEST_MODE = False: Sends the pitch to the actual found lead (USE WITH CAUTION!).
 TEST_MODE = os.getenv("TEST_MODE", "true").lower() == "true"
 
 # Paths
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DATA_DIR = os.path.join(BASE_DIR, "data")
-ADAPTER_PATH = os.path.join(BASE_DIR, "my-b2b-adapter")
+# __file__ is app/src/main.py
+SRC_DIR = os.path.dirname(os.path.abspath(__file__))
+APP_DIR = os.path.dirname(SRC_DIR)
+ROOT_DIR = os.path.dirname(APP_DIR)
+
+DATA_DIR = os.path.join(APP_DIR, "data")
+ADAPTER_PATH = os.path.join(ROOT_DIR, "my-b2b-adapter")
 
 # --- Limits ---
 MAX_MAILS_PER_RUN = 5
 
 # --- Helper Function: The Email Sender ---
 def send_cold_email(target_email, startup_name, category):
-    my_email = os.getenv("GMAIL_ADDRESS")
     my_password = os.getenv("GMAIL_PASSWORD")
     
-    if not my_email or not my_password:
+    if not MY_EMAIL or not my_password:
         print("❌ Error: GMAIL_ADDRESS or GMAIL_PASSWORD not found in environment!")
         return
 
     # In Test Mode, we override the recipient
-    recipient = my_email if TEST_MODE else target_email
+    recipient = MY_EMAIL if TEST_MODE else target_email
     
     print(f"📧 Drafting pitch for {startup_name} (Recipient: {recipient})...")
     msg = MIMEMultipart()
-    msg['From'] = my_email
+    msg['From'] = MY_EMAIL
     msg['To'] = recipient
     msg['Subject'] = f"Helping {startup_name} scale your engineering team"
     

@@ -1,10 +1,10 @@
 import requests
 from bs4 import BeautifulSoup
-from state import AgentState
+from app.core.state import AgentState
 
-from tools.scraper import WebScraper
+from app.tools.scraper import WebScraper
 from langchain_google_genai import ChatGoogleGenerativeAI
-from schema import ContactInfo
+from app.core.schema import ContactInfo
 
 class ScoutAgent:
     def __init__(self):

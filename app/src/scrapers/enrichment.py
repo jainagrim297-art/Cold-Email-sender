@@ -67,6 +67,20 @@ def get_contact_email_apollo(domain: str) -> str | None:
     return None
 
 
+def get_contact_email(domain: str) -> str | None:
+    """
+    Tries Hunter.io first, then Apollo.io as a fallback.
+    """
+    if not domain:
+        return None
+    
+    email = get_contact_email_hunter(domain)
+    if email:
+        return email
+        
+    return get_contact_email_apollo(domain)
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Main Orchestrator
 # ─────────────────────────────────────────────────────────────────────────────
@@ -84,7 +98,7 @@ def find_best_email(website_url: str, hn_url: str = None) -> str | None:
         print(f"✅ [Custom Engine] Found: {email}")
         return email
 
-    # Priority 2: Hunter.io
+    # Priority 2: API Enrichment (Hunter -> Apollo)
     domain = extract_domain(website_url)
     if domain:
         # Quality check: If it's a generic host (GitHub/GitLab), we skip Hunter/Apollo
@@ -93,14 +107,7 @@ def find_best_email(website_url: str, hn_url: str = None) -> str | None:
             print(f"  [QUALITY] Skipping generic host ({domain}) for Hunter/Apollo enrichment.")
             return None
 
-        email = get_contact_email_hunter(domain)
-        if email:
-            return email
-
-        # Priority 3: Apollo.io
-        email = get_contact_email_apollo(domain)
-        if email:
-            return email
+        return get_contact_email(domain)
 
     print(f"❌ All methods exhausted. No email found for {website_url}")
     return None

@@ -20,7 +20,7 @@ services:
 
   worker:
     build: .
-    command: python worker.py
+    command: python -m app.worker
     deploy:
       replicas: 3
     environment:

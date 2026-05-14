@@ -1,5 +1,5 @@
-from tools.mailer import GmailSender
-from state import AgentState
+from app.tools.mailer import GmailSender
+from app.core.state import AgentState
 
 class SenderAgent:
     def __init__(self):

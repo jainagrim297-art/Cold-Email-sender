@@ -6,19 +6,20 @@ from dotenv import load_dotenv
 from langgraph.graph import StateGraph, START, END
 from langgraph.checkpoint.sqlite import SqliteSaver 
 
-# Ensure leads.csv is found relative to the script
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-LEADS_PATH = os.path.join(BASE_DIR, "leads.csv")
-DB_PATH = os.path.join(BASE_DIR, "internship_hunt.db")
+# Ensure leads.csv is found relative to the project root
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+LEADS_PATH = os.path.join(ROOT_DIR, "leads.csv")
+DB_PATH = os.path.join(ROOT_DIR, "internship_hunt.db")
 
 # --- LOCAL IMPORTS ---
-from state import AgentState
-from agents.scout import ScoutAgent
-from agents.researcher import ResearcherAgent
-from agents.writer import WriterAgent
-from agents.lead_intelligence import LeadIntelAgent
-from tools.search import SearchTool
-from agents.sender import SenderAgent
+# --- LOCAL IMPORTS ---
+from app.core.state import AgentState
+from app.agents.scout import ScoutAgent
+from app.agents.researcher import ResearcherAgent
+from app.agents.writer import WriterAgent
+from app.agents.lead_intelligence import LeadIntelAgent
+from app.tools.search import SearchTool
+from app.agents.sender import SenderAgent
 
 load_dotenv()
 

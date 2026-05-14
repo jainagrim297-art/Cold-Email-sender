@@ -4,7 +4,7 @@ import argparse
 from dotenv import load_dotenv
 from typing import List, Set
 from langchain_google_genai import ChatGoogleGenerativeAI
-from tools.search import SearchTool
+from app.tools.search import SearchTool
 
 load_dotenv()
 

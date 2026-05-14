@@ -1,6 +1,6 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from schema import TechnicalInsight
-from state import AgentState
+from app.core.schema import TechnicalInsight
+from app.core.state import AgentState
 
 class ResearcherAgent:
     def __init__(self):

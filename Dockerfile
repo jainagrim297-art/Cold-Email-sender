@@ -40,4 +40,4 @@ EXPOSE 8000
 ENV PYTHONUNBUFFERED=1
 
 # Command to run will be overridden by docker-compose
-CMD ["uvicorn", "api:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "app.api:app", "--host", "0.0.0.0", "--port", "8000"]

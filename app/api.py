@@ -3,7 +3,7 @@ from pydantic import BaseModel
 import time
 
 # Import your incredibly powerful LangGraph pipeline and State
-from main import build_workflow
+from app.main import build_workflow
 
 app = FastAPI(title="Outreach AI Agent Backend", version="1.0.0")
 

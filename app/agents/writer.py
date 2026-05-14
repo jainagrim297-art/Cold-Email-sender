@@ -1,5 +1,5 @@
 from langchain_google_genai import ChatGoogleGenerativeAI
-from state import AgentState
+from app.core.state import AgentState
 
 class WriterAgent:
     def __init__(self):
