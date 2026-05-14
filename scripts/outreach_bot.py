@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 # Absolute imports for consistency
 import sys
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_DIR)
 
 from state import AgentState
@@ -20,7 +20,7 @@ from agents.sender import SenderAgent
 from tools.search import SearchTool
 from tools.lead_intelligence_pro import LeadIntelligencePro
 
-load_dotenv()
+load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 class OutreachBot:
     """

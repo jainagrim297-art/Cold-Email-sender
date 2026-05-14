@@ -5,7 +5,8 @@ import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 
-load_dotenv()
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(ROOT_DIR, ".env"))
 
 # Load your API key from the .env file
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))

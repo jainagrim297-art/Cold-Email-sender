@@ -8,7 +8,8 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_core.prompts import PromptTemplate
 
 # Load environment variables
-load_dotenv()
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+load_dotenv(os.path.join(ROOT_DIR, ".env"))
 
 print("🚀 Initializing Gemini API via LangChain...")
 
@@ -48,7 +49,8 @@ scraped_blogs = [
 print(f"📄 Found {len(scraped_blogs)} scraped blogs. Starting synthetic data generation...\n")
 
 # Open the jsonl file in "append" mode
-with open("dataset.jsonl", "a", encoding="utf-8") as f:
+dataset_path = os.path.join(ROOT_DIR, "dataset.jsonl")
+with open(dataset_path, "a", encoding="utf-8") as f:
     for i, blog in enumerate(scraped_blogs):
         print(f"Processing blog {i+1}/{len(scraped_blogs)}...")
         

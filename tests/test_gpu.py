@@ -1,5 +1,6 @@
-import sys
-sys.stdout.reconfigure(encoding='utf-8')
+import os
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(ROOT_DIR)
 
 # We flush the output immediately to bypass any Windows terminal freezing
 print("🚀 If you see this, Python is successfully running the file!", flush=True)

@@ -1,7 +1,9 @@
 import sqlite3
 import json
 
-db_path = "internship_hunt.db"
+import os
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+db_path = os.path.join(ROOT_DIR, "internship_hunt.db")
 conn = sqlite3.connect(db_path)
 cursor = conn.cursor()
 

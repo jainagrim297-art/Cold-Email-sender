@@ -7,9 +7,12 @@ from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig
 from peft import LoraConfig, get_peft_model
 from trl import SFTTrainer, SFTConfig
 
+import os
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print("🚀 Step 1: Loading Dataset...")
 # We load the jsonl file you just created
-dataset = load_dataset("json", data_files="dataset.jsonl", split="train")
+dataset_path = os.path.join(ROOT_DIR, "dataset.jsonl")
+dataset = load_dataset("json", data_files=dataset_path, split="train")
 
 print("🧠 Step 2: Preparing the Model for 8GB VRAM...")
 # To fit this on your RTX 4060, we shrink the model down to 4-bit math (Quantization)
@@ -39,7 +42,7 @@ peft_config = LoraConfig(
 print("⚙️ Step 4: Configuring the Training Loop...")
 # These are the hyperparameters. They control how fast the AI learns.
 training_args = SFTConfig(
-    output_dir="./custom-b2b-model",
+    output_dir=os.path.join(ROOT_DIR, "custom-b2b-model"),
     per_device_train_batch_size=1, # Keep this at 1 for 8GB VRAM
     gradient_accumulation_steps=4,
     learning_rate=2e-4,
@@ -62,5 +65,6 @@ trainer.train()
 
 print("💾 Step 6: Saving your customized AI...")
 # This saves the tiny adapter to your hard drive, NOT the whole 4GB model.
-trainer.model.save_pretrained("my-b2b-adapter")
-print("✅ Training Complete! Adapter saved to ./my-b2b-adapter")
+adapter_path = os.path.join(ROOT_DIR, "my-b2b-adapter")
+trainer.model.save_pretrained(adapter_path)
+print(f"✅ Training Complete! Adapter saved to {adapter_path}")
